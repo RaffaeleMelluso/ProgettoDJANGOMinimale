@@ -1,5 +1,7 @@
 asgiref==3.8.1
 Django==5.1.7
-django-ckeditor==6.7.2
+django-ckeditor-5 @ git+https://github.com/fish-not-phish/django-ckeditor-5.git@da36784b609f9115101a03061d41965f006ea873
 django-js-asset==3.1.2
+pillow==11.1.0
 sqlparse==0.5.3
+typing_extensions==4.13.0
