@@ -1,23 +1,23 @@
 from django.contrib import admin
-from django.utils.safestring import mark_safe
-from .models import TestoDiProva
+from django import forms
+from django_ckeditor_5.widgets import CKEditor5Widget
+from .models import Article  # Assicurati di importare il modello corretto
 
-class TestoDiProvaAdmin(admin.ModelAdmin):
-    list_display = ('titolo', 'render_contenuto')
+class ArticleAdminForm(forms.ModelForm):
+    """Form personalizzato per il modello Article con CKEditor5Widget."""
 
-    def render_contenuto(self, obj):
-        # Usa MathJax per il rendering delle formule
-        return mark_safe(f"""
-            <div>{obj.contenuto}</div>
-            <script type="text/javascript" async
-                src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-            </script>
-            <script>
-                MathJax.typesetPromise();  // Forza MathJax a eseguire il rendering
-            </script>
-        """)
+    class Meta:
+        model = Article
+        fields = "__all__"
+        widgets = {
+            "text": CKEditor5Widget(
+                attrs={"class": "django_ckeditor_5"}, config_name="extends"
+            )
+        }
 
-    render_contenuto.short_description = "Contenuto (renderizzato)"
+class ArticleAdmin(admin.ModelAdmin):
+    form = ArticleAdminForm
+    list_display = ("title",)
 
 # Registra il modello con la configurazione personalizzata
-admin.site.register(TestoDiProva, TestoDiProvaAdmin)
+admin.site.register(Article, ArticleAdmin)
