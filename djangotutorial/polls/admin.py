@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import TestoDiProva  # Importa il modello
 
-# Register your models here.
+# Registra il modello
+admin.site.register(TestoDiProva)
