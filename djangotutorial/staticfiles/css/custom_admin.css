@@ -1,0 +1,8 @@
+/* Forza il colore del testo in nero */
+body {
+    color: black !important;
+}
+
+.cke_editable {
+    color: black !important; /* Forza il colore del testo nell'editor CKEditor */
+}
